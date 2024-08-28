@@ -1,7 +1,7 @@
 package com.example.model;
 
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDate;
+import java.util.Date;
 
 public class User {
     @NotBlank(message = "Login must not be empty or null")
@@ -10,13 +10,26 @@ public class User {
     @NotBlank(message = "Password must not be empty or null")
     private String password;
 
-    private LocalDate date;
+    private Date date;
+    private String email;
 
-    public User(String login, String password) {
+    //конструктор для получение user из БД
+    public User(String login, String password, Date date, String email) {
         this.login = login;
         this.password = password;
-        this.date = LocalDate.now();
+        this.date = date;
+        this.email = email;
     }
+
+    // конструктор для вставки user в БД
+    public User(@NotBlank(message = "Login must not be empty or null") String login, @NotBlank(message = "Password must not be empty or null") String password, String email) {
+        this.login = login;
+        this.password = password;
+        this.date = new java.util.Date();
+        this.email = email;
+    }
+
+    //public User() {}
 
     public String getLogin() {
         return login;
@@ -26,28 +39,23 @@ public class User {
         return password;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
 
     @Override
     public String toString() {
-        return "{" +
-                "\"login\":\"" + login + "\"," +
-                "\"password\":\"" + password + "\"," +
-                "\"date\":\"" + date + "\"" +
-                "}";
+        return "User{" +
+                "login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", date=" + date +
+                ", email='" + email + '\'' +
+                '}';
     }
+
 }
