@@ -12,7 +12,7 @@ public class DatabaseManager {
 
 
     // Метод для получения пользователя по логину
-    public static User getUserByLogin(String login) {
+    public static User getUserByLogin(String login) throws SQLException {
         String query = "SELECT l.login, l.pwd, l.dt, e.email " +
                 "FROM usrmanager.logins l " +
                 "JOIN usrmanager.emails  e ON l.login = e.login " +
@@ -39,7 +39,7 @@ public class DatabaseManager {
                 throw new UserNotFoundException("user c login = " + login + " не найден.");
             }
         } catch (SQLException exception) {
-            System.err.println("Ошибка при получении пользователя из базы данных: " + exception.getMessage());
+            throw new SQLException("Ошибка при добавлении пользователя в базу данных: " + exception.getMessage(), exception);
         } finally {
             closeQuietly(resultSet);
             closeQuietly(statement);
@@ -54,7 +54,7 @@ public class DatabaseManager {
             try {
                 closeable.close();
             } catch (Exception e) {
-                System.err.println("Ошибка при закрытии ресурса: " + closeable  + e.getMessage());
+                throw new RuntimeException("Ошибка при закрытии ресурса: " + closeable, e);
             }
         }
     }
@@ -67,8 +67,8 @@ public class DatabaseManager {
              PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
 
             preparedStatement.setString(1, user.getLogin());
-            preparedStatement.setString(2, user.getPassword());
-            preparedStatement.setDate(3,   new Date(user.getDate().getTime()));
+            preparedStatement.setString(2, user.getPwd());
+            preparedStatement.setDate(3,   new Date(user.getDt().getTime()));
             preparedStatement.setString(4, user.getLogin());
             preparedStatement.setString(5, user.getEmail());
 

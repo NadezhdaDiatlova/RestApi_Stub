@@ -29,5 +29,9 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>("Ошибка при обработке запроса", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<?> handleRuntimeException(RuntimeException ex) {
+        return ResponseEntity.internalServerError().body(ex.getMessage());
+    }
 
 }
