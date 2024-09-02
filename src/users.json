@@ -1,0 +1,102 @@
+[
+  {
+    "login": "user0",
+    "pwd": "password0",
+    "dt": [
+      2024,
+      9,
+      2
+    ],
+    "email": "user0@example.com"
+  },
+  {
+    "login": "user1",
+    "pwd": "password1",
+    "dt": [
+      2024,
+      9,
+      2
+    ],
+    "email": "user1@example.com"
+  },
+  {
+    "login": "user2",
+    "pwd": "password2",
+    "dt": [
+      2024,
+      9,
+      2
+    ],
+    "email": "user2@example.com"
+  },
+  {
+    "login": "user3",
+    "pwd": "password3",
+    "dt": [
+      2024,
+      9,
+      2
+    ],
+    "email": "user3@example.com"
+  },
+  {
+    "login": "user4",
+    "pwd": "password4",
+    "dt": [
+      2024,
+      9,
+      2
+    ],
+    "email": "user4@example.com"
+  },
+  {
+    "login": "user5",
+    "pwd": "password5",
+    "dt": [
+      2024,
+      9,
+      2
+    ],
+    "email": "user5@example.com"
+  },
+  {
+    "login": "user6",
+    "pwd": "password6",
+    "dt": [
+      2024,
+      9,
+      2
+    ],
+    "email": "user6@example.com"
+  },
+  {
+    "login": "user7",
+    "pwd": "password7",
+    "dt": [
+      2024,
+      9,
+      2
+    ],
+    "email": "user7@example.com"
+  },
+  {
+    "login": "user8",
+    "pwd": "password8",
+    "dt": [
+      2024,
+      9,
+      2
+    ],
+    "email": "user8@example.com"
+  },
+  {
+    "login": "user9",
+    "pwd": "password9",
+    "dt": [
+      2024,
+      9,
+      2
+    ],
+    "email": "user9@example.com"
+  }
+]

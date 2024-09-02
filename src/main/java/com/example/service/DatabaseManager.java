@@ -4,6 +4,7 @@ import com.example.exception.UserNotFoundException;
 import com.example.model.User;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 public class DatabaseManager {
     private static final String url = "jdbc:postgresql://192.168.1.53:5432/mydb";
@@ -68,7 +69,8 @@ public class DatabaseManager {
 
             preparedStatement.setString(1, user.getLogin());
             preparedStatement.setString(2, user.getPwd());
-            preparedStatement.setDate(3,   new Date(user.getDt().getTime()));
+            //preparedStatement.setDate(3,   java.sql.Date.valueOf(user.getDt()));
+            preparedStatement.setDate(3, Date.valueOf(LocalDate.now()));
             preparedStatement.setString(4, user.getLogin());
             preparedStatement.setString(5, user.getEmail());
 

@@ -1,23 +1,32 @@
 package com.example.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.constraints.NotBlank;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class User {
+
+    @JsonProperty("login")
     @NotBlank(message = "Login must not be empty or null")
     private String login;
 
+    @JsonProperty("pwd")
     @NotBlank(message = "Password must not be empty or null")
     private String pwd;
 
-    private Date dt;
+    @JsonProperty("dt")
+    //@JsonFormat(pattern="yyyy-MM-dd")
+    private LocalDate dt;
+
+    @JsonProperty("email")
     private String email;
 
-    //конструктор для получение user из БД
-    public User(String login, String pwd, Date dt, String email) {
+    //конструктор для получения user из БД
+    public User(String login, String pwd, java.sql.Date sqlDate, String email) {
         this.login = login;
         this.pwd = pwd;
-        this.dt = dt;
+        this.dt = sqlDate.toLocalDate();
         this.email = email;
     }
 
@@ -25,7 +34,7 @@ public class User {
     public User(String login, String pwd, String email) {
         this.login = login;
         this.pwd = pwd;
-        this.dt = new java.util.Date();
+        this.dt = LocalDate.now();
         this.email = email;
     }
 
@@ -36,11 +45,15 @@ public class User {
         return login;
     }
 
+    public void setDt(LocalDate dt) {
+        this.dt = dt;
+    }
+
     public String getPwd() {
         return pwd;
     }
 
-    public Date getDt() {
+    public LocalDate getDt() {
         return dt;
     }
 

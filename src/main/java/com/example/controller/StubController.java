@@ -11,6 +11,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
@@ -30,6 +32,17 @@ public class StubController {
         }
         try {
             User userFromDb = DatabaseManager.getUserByLogin(login);
+            // Запись в CSV-файл
+            try (FileWriter fileWriter = new FileWriter("user_" + login + ".csv")) {
+                StringBuilder csvRow = new StringBuilder();
+                csvRow.append(login).append(",");
+                csvRow.append(userFromDb.getPwd()).append(",");
+                csvRow.append(userFromDb.getDt()).append(",");
+                csvRow.append(userFromDb.getEmail()).append("\n");
+                fileWriter.write(csvRow.toString());
+            } catch (IOException e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
             return ResponseEntity.ok(userFromDb);
         } catch (SQLException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -50,6 +63,7 @@ public class StubController {
         String email  = user.getEmail();
 
         User userForInsert = new User(login, pwd, email);
+        System.out.println(userForInsert);
 
         try {
             DatabaseManager.insertUser(userForInsert);
@@ -87,5 +101,6 @@ public class StubController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 }
 
